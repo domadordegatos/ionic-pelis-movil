@@ -1,0 +1,43 @@
+<ion-header mode="ios">
+  <ion-toolbar color="tertiary">
+    <ion-title>Pelis Neyder</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar placeholder="Filter Movies" mode="ios" [(ngModel)]="term" (ionChange)="searchChange($event)"></ion-searchbar>
+
+  <ion-item>
+    <ion-label>Select Search Type</ion-label>
+    <ion-segment mode="ios" (ionChange)="searchChange($event)" [(ngModel)]="type">
+      <ion-segment-button seleted="true" value="">
+        <ion-label>All</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="movie">
+        <ion-label>Movie</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="series">
+        <ion-label>Series</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="episodes">
+        <ion-label>Episodes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-item>
+
+  <ion-list>
+    <ion-item button *ngFor="let item of (results | async)"[routerLink]="['/','peli',item.imdbID ]">
+        <ion-avatar slot="start">
+          <img src="{{item.Poster}}" alt="{{item.Title}}" *ngIf="item.Poster != 'N/A'" />
+        </ion-avatar>
+        <ion-label text-wrap>
+          <h3> {{item.Title}} </h3>
+          {{item.Year}}
+        </ion-label>
+        <ion-icon slot="end" name="videocam" *ngIf="item.Type === 'movie'" ></ion-icon>
+        <ion-icon slot="end" name="tv" *ngIf="item.Type === 'series'" ></ion-icon>
+        <ion-icon slot="end" name="tablet-landscape" *ngIf="item.Type === 'episodes'" ></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

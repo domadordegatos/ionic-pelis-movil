@@ -1,5 +1,8 @@
 {
   "name": "pelisApp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
   "type": "angular"
 }
